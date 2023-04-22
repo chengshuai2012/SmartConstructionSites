@@ -1,0 +1,3 @@
+
+rootProject.name = "SmartConstructionSites"
+include ':app'
