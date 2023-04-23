@@ -67,4 +67,7 @@ dependencies {
     kapt 'com.alibaba:arouter-compiler:1.5.2'
     api 'com.jaeger.statusbarutil:library:1.5.1'
     api 'io.github.youth5201314:banner:2.2.2'
+    api('com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7') {
+        exclude group: 'com.android.support'
+    }
 }

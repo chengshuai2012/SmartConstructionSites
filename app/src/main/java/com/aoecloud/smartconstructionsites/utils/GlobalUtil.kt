@@ -28,6 +28,7 @@ import android.os.Process
 import android.text.TextUtils
 import com.aoecloud.smartconstructionsites.base.BaseApplication
 import com.aoecloud.smartconstructionsites.bean.LoginData
+import com.aoecloud.smartconstructionsites.bean.ProjectDataX
 import java.io.File
 import java.text.DecimalFormat
 import java.util.*
@@ -67,6 +68,8 @@ object GlobalUtil {
         get() = BaseApplication.context.packageName
 
     var loginData: LoginData?=null
+    var projectId: String=""
+    var chooseProject: ProjectDataX?=null
 
     /**
      * 获取当前应用程序的名称。

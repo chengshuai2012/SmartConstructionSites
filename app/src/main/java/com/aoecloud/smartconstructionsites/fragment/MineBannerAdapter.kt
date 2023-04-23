@@ -52,6 +52,9 @@ class MineBannerAdapter constructor(
     ) {
         GlideUtils.loadNormal(data?.image?:"",holder.pic)
         holder.title.text = data?.project_name
+        holder.itemView.setOnClickListener {
+            mItemClickCallBack?.clickItem(position,data)
+        }
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
@@ -84,7 +87,7 @@ class MineBannerAdapter constructor(
     }
 
     interface OnItemClickListener {
-        fun clickItem(pos: Int, item: ProjectDataX?, srcView: ImageView)
+        fun clickItem(pos: Int, item: ProjectDataX?)
     }
 }
 

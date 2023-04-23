@@ -24,7 +24,7 @@ class MineFragment : BaseFragment() {
     private val binding
         get() = _binding!!
 
-    private val mainViewmodel by lazy {
+    private val mainViewModel by lazy {
         ViewModelProvider(
             this,
             InjectorUtil.getMainViewModelFactory()
@@ -45,8 +45,8 @@ class MineFragment : BaseFragment() {
             SpUtils.putString(requireContext(),"loginData","")
             startActivity(Intent(requireContext(),LoginActivity::class.java))
         }
-        mainViewmodel.bindParam.value = GlobalUtil.loginData?.id?:""
-        mainViewmodel.bindData.observe(requireActivity()){
+        mainViewModel.bindParam.value = GlobalUtil.loginData?.id?:""
+        mainViewModel.bindData.observe(requireActivity()){
             it.onSuccess {
                 binding.account.text = GlobalUtil.loginData?.username?:""
                 binding.phoneNumber.text = it.contact_tel

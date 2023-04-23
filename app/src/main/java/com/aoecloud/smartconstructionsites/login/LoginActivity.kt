@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity() {
         get() {
             return _binding!!
         }
-    private val mainViewmodel by lazy {
+    private val mainViewModel by lazy {
         ViewModelProvider(
             this,
             InjectorUtil.getMainViewModelFactory()
@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity() {
             if (TextUtils.isEmpty(binding.inputAccount.text.toString())||TextUtils.isEmpty(binding.inputPassword.text.toString())){
                 ToastUtils.showToast("请输入账号或密码")
             }else{
-                mainViewmodel.login(binding.inputAccount.text.toString(),binding.inputPassword.text.toString())
+                mainViewModel.login(binding.inputAccount.text.toString(),binding.inputPassword.text.toString())
             }
         }
         val loginData = SpUtils.getString(this@LoginActivity, "loginData")
@@ -48,15 +48,15 @@ class LoginActivity : BaseActivity() {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }
-        mainViewmodel.loginData.observe(this){
-            it.onSuccess {
-                GlobalUtil.loginData = it
-                SpUtils.putString(this@LoginActivity,"loginData",Gson().toJson(it)!!)
+        mainViewModel.loginData.observe(this){
+            it.onSuccess {loginData->
+                GlobalUtil.loginData = loginData
+                SpUtils.putString(this@LoginActivity,"loginData",Gson().toJson(loginData)!!)
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }
-            it.onFailure {
-                ToastUtils.showToast(ResponseHandler.getFailureTips(it))
+            it.onFailure {e->
+                ToastUtils.showToast(ResponseHandler.getFailureTips(e))
             }
         }
     }

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.aoecloud.smartconstructionsites.base.BaseApplication
+import com.aoecloud.smartconstructionsites.wedgit.GlideRoundBorderTransform
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -26,7 +27,13 @@ object GlideUtils {
             .into(view)
 
     }
-
+    fun loadRoundImage(url: String?, radius: Int, view: ImageView) {
+        Glide.with(BaseApplication.context)
+            .load(url)
+            .transform(MultiTransformation(CenterCrop(),
+                RoundedCorners(DimensionUtils.dpToPx(radius))))
+            .into(view)
+    }
     /**
      * 加载头像并设置错误和占位图
      */
@@ -50,6 +57,49 @@ object GlideUtils {
             .transform(MultiTransformation(CenterCrop()))
             .into(view)
     }
+    fun loadWithCorner(
+        res: String?,
+        view: ImageView,
+        radius: Int = 6,
+        borderWidth: Int = 0,
+        @DrawableRes defRes: Int = -1,
+        strokeColor: Int = Color.WHITE
+    ) {
+        val option = RequestOptions
+            .bitmapTransform(
+                GlideRoundBorderTransform(
+                    DimensionUtils.dpToPx(borderWidth).toFloat(),
+                    DimensionUtils.dpToPx(radius).toFloat(),
+                    strokeColor
+                )
+            )
+            .error(defRes)
+            .placeholder(defRes)
+        if (defRes == -1) {
+            Glide.with(BaseApplication.context)
+                .load(res)
+                .apply(option)
+                .into(view)
+        } else {
+            val transform = Glide.with(BaseApplication.context).load(defRes)
+                .apply(
+                    RequestOptions().transform(
+                        GlideRoundBorderTransform(
+                            DimensionUtils.dpToPx(borderWidth).toFloat(),
+                            DimensionUtils.dpToPx(radius).toFloat(),
+                            strokeColor
+                        )
+                    )
+                )
+            Glide.with(BaseApplication.context)
+                .load(res)
+                .apply(option)
+                .thumbnail(transform)
+                .into(view)
+        }
+
+    }
+
     fun loadNormal(resId: Int, view: ImageView) {
         Glide.with(BaseApplication.context)
             .load(resId)
