@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.aoecloud.smartconstructionsites.BuildConfig
+import com.videogo.openapi.EZOpenSDK
 
 
 class BaseApplication : Application() {
@@ -23,6 +24,12 @@ class BaseApplication : Application() {
             ARouter.openLog()    // 打印日志
             ARouter.openDebug()   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
+        EZOpenSDK.showSDKLog(true);
+        /** * 设置是否支持P2P取流,详见api */
+        EZOpenSDK.enableP2P(false);
+
+        /** * APP_KEY请替换成自己申请的 */
+        EZOpenSDK.initLib(this, "fc3a1f6f7bb94d77b71f55873f08e027");
     }
 
     companion object {

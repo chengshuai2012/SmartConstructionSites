@@ -1,16 +1,16 @@
 package com.aoecloud.smartconstructionsites.project
 
+import android.content.Intent
+import android.media.CamcorderProfile
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.aoecloud.smartconstructionsites.base.BaseActivity
+import com.aoecloud.smartconstructionsites.camera.CameraListActivity
 import com.aoecloud.smartconstructionsites.databinding.ActivityProjectBinding
 import com.aoecloud.smartconstructionsites.network.ResponseHandler
-import com.aoecloud.smartconstructionsites.utils.GlideUtils
-import com.aoecloud.smartconstructionsites.utils.GlobalUtil
-import com.aoecloud.smartconstructionsites.utils.InjectorUtil
-import com.aoecloud.smartconstructionsites.utils.ToastUtils
+import com.aoecloud.smartconstructionsites.utils.*
 import com.aoecloud.smartconstructionsites.viewmodel.MainViewModel
 
 class ProjectActivity : BaseActivity() {
@@ -37,6 +37,13 @@ class ProjectActivity : BaseActivity() {
         binding.noticeText.isSelected = true
     }
     private fun initView(){
+        setOnClickListener(binding.clCamera){
+            when(this){
+                binding.clCamera->{
+                    startActivity(Intent(this@ProjectActivity,CameraListActivity::class.java))
+                }
+            }
+        }
         GlideUtils.loadRoundImage(GlobalUtil.chooseProject?.image?:"",1,binding.projectImage)
         binding.projectNameText.text = GlobalUtil.chooseProject?.project_name
 

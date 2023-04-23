@@ -389,6 +389,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
                             android:layout_weight="1"
+                            android:id="@+id/cl_camera"
                             android:background="@drawable/shape_white_with_corner_16"
                             android:layout_height="140dp">
                             <TextView

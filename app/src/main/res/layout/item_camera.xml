@@ -18,9 +18,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
             <ImageView
-                android:layout_width="120dp"
+                android:layout_width="60dp"
                 android:layout_height="80dp"
-                android:id="@+id/project_image"
+                android:id="@+id/camera_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -31,26 +31,11 @@
                 app:layout_constraintLeft_toRightOf="@+id/project_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:id="@+id/project_name"
+                android:id="@+id/camera_type"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:paddingLeft="14dp"
                 android:textColor="@color/black"
-                android:paddingRight="9dp"
-                android:maxLines="2"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toRightOf="@+id/project_image"
-                app:layout_constraintBottom_toBottomOf="@+id/project_image"
-                app:layout_constraintRight_toRightOf="parent"
-                android:id="@+id/project_time"
-                android:textSize="14dp"
-                android:textColor="#797990"
-                android:paddingLeft="14dp"
-                android:paddingRight="9dp"
-                android:layout_marginBottom="10dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

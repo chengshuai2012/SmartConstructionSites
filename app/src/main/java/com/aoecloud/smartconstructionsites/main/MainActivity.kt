@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.aoecloud.smartconstructionsites.base.BaseActivity
 import com.aoecloud.smartconstructionsites.databinding.ActivityMainBinding
 import com.aoecloud.smartconstructionsites.utils.setOnClickListener
+import com.videogo.openapi.EZOpenSDK
 
 class MainActivity : BaseActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -24,6 +25,7 @@ class MainActivity : BaseActivity() {
         initListener()
     }
     private fun initListener() {
+        EZOpenSDK.getInstance().setAccessToken("at.14nsj8063ie2wkkw0p19pi3cb02oev1p-7zptyb5bye-15nyb3e-frbuqjnq8")
         setOnClickListener(  binding.navigationBar.btnHomePage,
             binding.navigationBar.btnMine){
             when (this) {

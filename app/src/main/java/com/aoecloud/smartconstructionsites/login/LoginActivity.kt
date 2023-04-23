@@ -48,6 +48,7 @@ class LoginActivity : BaseActivity() {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }
+
         mainViewModel.loginData.observe(this){
             it.onSuccess {loginData->
                 GlobalUtil.loginData = loginData

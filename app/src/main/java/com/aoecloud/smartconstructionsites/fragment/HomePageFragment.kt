@@ -52,6 +52,7 @@ class HomePageFragment : BaseFragment() {
                 val itemProjectBinding = holder.dataBinding as ItemProjectBinding
                 GlideUtils.loadRoundImage(item.image,6,itemProjectBinding.projectImage)
                 itemProjectBinding.projectName.text = item.project_name
+                itemProjectBinding.projectTime.text = item.insert_time
                 if (holder.layoutPosition==data.size-1){
                     val layoutParams = holder.itemView.layoutParams
                     if (layoutParams is ViewGroup.MarginLayoutParams){

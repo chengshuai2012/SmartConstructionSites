@@ -20,6 +20,7 @@ class MainRepository(private val network: Network) {
     suspend fun login(account: String, passWord: String) = requestLogin(account, passWord)
     suspend fun bind( id: String) = requestBind(id)
     suspend fun getProjectData( id: String) = requestProjectData(id)
+    suspend fun getCameraData( id: String) = requestCameraData(id)
 
     private suspend fun requestLogin(account: String, passWord: String) =
         withContext(Dispatchers.IO) {
@@ -49,6 +50,15 @@ class MainRepository(private val network: Network) {
                 "project_id" to id,
             )
             val data = async { network.mainPageService.getModuleData(params) }
+            val await = data.await()
+            await
+        }
+    private suspend fun requestCameraData(id: String) =
+        withContext(Dispatchers.IO) {
+            val params = hashMapOf<String, Any>(
+                "project_id" to id,
+            )
+            val data = async { network.mainPageService.findList(params) }
             val await = data.await()
             await
         }
