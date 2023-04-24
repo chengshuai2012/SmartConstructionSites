@@ -1,9 +1,16 @@
 package com.aoecloud.smartconstructionsites.main
 
 import android.os.Bundle
+import android.text.TextUtils
+import androidx.lifecycle.ViewModelProvider
 import com.aoecloud.smartconstructionsites.base.BaseActivity
+import com.aoecloud.smartconstructionsites.bean.TokenBean
 import com.aoecloud.smartconstructionsites.databinding.ActivityMainBinding
+import com.aoecloud.smartconstructionsites.utils.InjectorUtil
+import com.aoecloud.smartconstructionsites.utils.SpUtils
 import com.aoecloud.smartconstructionsites.utils.setOnClickListener
+import com.aoecloud.smartconstructionsites.viewmodel.MainViewModel
+import com.google.gson.Gson
 import com.videogo.openapi.EZOpenSDK
 
 class MainActivity : BaseActivity() {
@@ -12,7 +19,12 @@ class MainActivity : BaseActivity() {
         get() {
             return _binding!!
         }
-
+    private val mainViewModel by lazy {
+        ViewModelProvider(
+            this,
+            InjectorUtil.getMainViewModelFactory()
+        )[MainViewModel::class.java]
+    }
     private val mineAdapter:MainAdapter = MainAdapter(this@MainActivity)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +37,25 @@ class MainActivity : BaseActivity() {
         initListener()
     }
     private fun initListener() {
-        EZOpenSDK.getInstance().setAccessToken("at.14nsj8063ie2wkkw0p19pi3cb02oev1p-7zptyb5bye-15nyb3e-frbuqjnq8")
+
+        val tokenString = SpUtils.getString(this@MainActivity, "token")
+        if (TextUtils.isEmpty(tokenString)){
+            mainViewModel.tokenParam.value=""
+        }else{
+            val tokenBean = Gson().fromJson(tokenString, TokenBean::class.java)
+            if (System.currentTimeMillis()>tokenBean.expireTime){
+                mainViewModel.tokenParam.value=""
+            }else{
+                EZOpenSDK.getInstance().setAccessToken(tokenBean.accessToken)
+            }
+        }
+        mainViewModel.tokenData.observe(this){
+            it.onSuccess {
+                SpUtils.putString(this@MainActivity, "token",Gson().toJson(it))
+                EZOpenSDK.getInstance().setAccessToken(it.accessToken)
+            }
+        }
+
         setOnClickListener(  binding.navigationBar.btnHomePage,
             binding.navigationBar.btnMine){
             when (this) {

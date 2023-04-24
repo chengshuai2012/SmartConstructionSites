@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aoecloud.smartconstructionsites.R
 import com.aoecloud.smartconstructionsites.base.BaseActivity
@@ -22,7 +23,10 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.videogo.constant.IntentConsts
 import com.videogo.openapi.EZOpenSDK
+import com.videogo.openapi.bean.EZDeviceInfo
 import com.videogo.util.DateTimeUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CameraListActivity : BaseActivity() {
     private var _binding: ActivityCameraListBinding? = null
@@ -59,19 +63,24 @@ class CameraListActivity : BaseActivity() {
                 ToastUtils.showToast(ResponseHandler.getFailureTips(it))
             }
         }
-        val deviceInfo = EZOpenSDK.getInstance().getDeviceInfo("AA1484196")
-        val filter = deviceInfo.cameraInfoList.filter {
-            it.cameraNo == 7
+        var deviceInfo:EZDeviceInfo?=null
+        lifecycleScope.launch(Dispatchers.IO) {
+            deviceInfo= EZOpenSDK.getInstance().getDeviceInfo("AA1484196")
         }
+
+
         val linearLayoutManager = LinearLayoutManager(this@CameraListActivity)
         binding.cameraRc.layoutManager=linearLayoutManager
         binding.cameraRc.adapter=adapter
         mainViewModel.cameraParam.value = GlobalUtil.projectId
         adapter.setOnItemClickListener(object :OnItemClickListener{
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+                val filter = deviceInfo?.cameraInfoList?.filter {
+                    it.cameraNo == 7
+                }
                 val intent = Intent(this@CameraListActivity, EZPlayBackListActivity::class.java)
                 intent.putExtra(RemoteListContant.QUERY_DATE_INTENT_KEY, DateTimeUtil.getNow())
-                intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, filter[0])
+                intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, filter?.get(0))
                 intent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, deviceInfo)
                 startActivity(intent)
             }

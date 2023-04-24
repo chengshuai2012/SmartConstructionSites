@@ -9,7 +9,7 @@ class MainViewModel(val repository: MainRepository) : ViewModel() {
     var bindParam = MutableLiveData<String>()
     var projectId = MutableLiveData<String>()
     var cameraParam = MutableLiveData<String>()
-    var cameraAccountParam= MutableLiveData<String>()
+    var tokenParam= MutableLiveData<String>()
 
     val loginData = Transformations.switchMap(loginParam) {
         liveData {
@@ -22,6 +22,18 @@ class MainViewModel(val repository: MainRepository) : ViewModel() {
             emit(result)
         }
     }
+    val tokenData = Transformations.switchMap(tokenParam) {
+        liveData {
+            val result = try {
+                val loginData = repository.getToken()
+                Result.success(loginData)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+            emit(result)
+        }
+    }
+
     val cameraData = Transformations.switchMap(cameraParam) {
         liveData {
             val result = try {
@@ -58,5 +70,6 @@ class MainViewModel(val repository: MainRepository) : ViewModel() {
     fun login(account: String, password: String){
         loginParam.value = LoginParam(account,password)
     }
+
     inner class LoginParam(val account: String,val password: String)
 }

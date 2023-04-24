@@ -301,7 +301,7 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
     // 抖动动画
     private Animation downShake;
 
-    private AnimationDrawable downDrawable;
+
 
     private ImageView matteImage;
 
@@ -1611,7 +1611,6 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
         measure(downLayout);
         measure(controlArea);
         downloading = (ImageView) findViewById(R.id.downloading);
-        downDrawable = ((AnimationDrawable) downloading.getBackground());
         downloadingNumber = (TextView) findViewById(R.id.downloading_number);
         loadingPbLayout = (LinearLayout) findViewById(R.id.loading_pb_ly);
 
@@ -1663,10 +1662,7 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
     }
 
     private void startGifAnimation() {
-        if (!downDrawable.isRunning()) {
-            downDrawable = (AnimationDrawable) downloading.getBackground();
-            downDrawable.start();
-        }
+
     }
 
     @Override

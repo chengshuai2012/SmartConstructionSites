@@ -17,12 +17,13 @@ import java.nio.charset.Charset
 
 object ServiceCreator {
     val gson =  Gson()
-    const val BASE_URL = "http://114.115.218.94:8081/zuul/"
+    const val BASE_URL = "http://114.115.218.94:8081/"
     private val UTF8 = Charset.forName("UTF-8")
     val httpClient = OkHttpClient.Builder()
         .addInterceptor(ResponseInterceptor())
         .addInterceptor(HeaderInterceptor())
         .addInterceptor(BasicParamsInterceptor())
+        .addInterceptor(ChangeUrlInterceptor())
         .addInterceptor(HttpLoggingInterceptor().apply {
             if (BuildConfig.DEBUG){
                 level = HttpLoggingInterceptor.Level.BODY
@@ -86,10 +87,15 @@ object ServiceCreator {
             }
             val jsonObject = JSONObject(response.body()?.string())
 
-            val code = jsonObject.get("code") as Int
+            val code = if ( jsonObject.get("code") is String){
+                (jsonObject.get("code") as String).toInt()
+            }else{
+                jsonObject.get("code") as Int
+            }
+
             val msg = jsonObject.get("msg") as String
 
-            if (code!=0){
+            if (code!=0&&code!=200){
                 throw ResponseCodeException(code,msg)
             }else{
 

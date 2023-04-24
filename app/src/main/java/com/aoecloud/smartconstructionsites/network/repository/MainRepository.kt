@@ -19,6 +19,7 @@ class MainRepository(private val network: Network) {
 
     suspend fun login(account: String, passWord: String) = requestLogin(account, passWord)
     suspend fun bind( id: String) = requestBind(id)
+    suspend fun getToken() = requestToken()
     suspend fun getProjectData( id: String) = requestProjectData(id)
     suspend fun getCameraData( id: String) = requestCameraData(id)
 
@@ -41,6 +42,12 @@ class MainRepository(private val network: Network) {
                 "bind_id" to id,
             )
             val data = async { network.mainPageService.getAccountInfo(params) }
+            val await = data.await()
+            await
+        }
+    private suspend fun requestToken() =
+        withContext(Dispatchers.IO) {
+            val data = async { network.mainPageService.getToken("fc3a1f6f7bb94d77b71f55873f08e027","e19d6d442ef4d3f14297a6d440b5c891") }
             val await = data.await()
             await
         }
