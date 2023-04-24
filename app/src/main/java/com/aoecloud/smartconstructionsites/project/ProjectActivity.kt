@@ -46,6 +46,7 @@ class ProjectActivity : BaseActivity() {
         }
         GlideUtils.loadRoundImage(GlobalUtil.chooseProject?.image?:"",1,binding.projectImage)
         binding.projectNameText.text = GlobalUtil.chooseProject?.project_name
+        binding.title.text = GlobalUtil.chooseProject?.project_name
 
         mainViewModel.projectId.value = GlobalUtil.projectId
 

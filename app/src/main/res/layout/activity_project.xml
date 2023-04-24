@@ -6,7 +6,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:background="#F2F3F6"
-        android:paddingBottom="60dp"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +29,7 @@
                     android:id="@+id/back"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/icon_back"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -638,6 +638,7 @@
                         android:orientation="horizontal"
                         android:paddingHorizontal="10dp"
                         android:layout_marginTop="15dp"
+                        android:paddingBottom="60dp"
                         android:layout_height="wrap_content">
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"

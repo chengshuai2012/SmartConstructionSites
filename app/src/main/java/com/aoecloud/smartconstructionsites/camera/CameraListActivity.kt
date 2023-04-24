@@ -2,6 +2,7 @@ package com.aoecloud.smartconstructionsites.camera
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +15,7 @@ import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.RemoteList
 import com.aoecloud.smartconstructionsites.databinding.ActivityCameraListBinding
 import com.aoecloud.smartconstructionsites.databinding.ItemCameraBinding
 import com.aoecloud.smartconstructionsites.network.ResponseHandler
+import com.aoecloud.smartconstructionsites.utils.GlideUtils
 import com.aoecloud.smartconstructionsites.utils.GlobalUtil
 import com.aoecloud.smartconstructionsites.utils.InjectorUtil
 import com.aoecloud.smartconstructionsites.utils.ToastUtils
@@ -52,20 +54,44 @@ class CameraListActivity : BaseActivity() {
             R.layout.item_camera) {
             override fun convert(holder: BaseDataBindingHolder<ItemCameraBinding>, item: CameraListItem) {
                 val itemProjectBinding = holder.dataBinding as ItemCameraBinding
-                itemProjectBinding.cameraType.text = item.device_name
+                itemProjectBinding.data = item
+                GlideUtils.loadWithCorner(item.image,itemProjectBinding.cameraImage,6)
             }
         }
         mainViewModel.cameraData.observe(this){
             it.onSuccess { data->
-                adapter.setList(data)
+                var deviceInfo:EZDeviceInfo?=null
+                if (!data.isNullOrEmpty()){
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        deviceInfo= EZOpenSDK.getInstance().getDeviceInfo(data[0].deviceSerial)
+
+                        data.forEachIndexed {index, cameraListItem ->
+                            if (deviceInfo?.cameraInfoList?.size?:0>index){
+                                val camara = deviceInfo?.cameraInfoList?.get(index)
+
+//                                try {
+//                                    val captureCamera = EZOpenSDK.getInstance()
+//                                        .captureCamera(deviceInfo?.deviceSerial, camara?.cameraNo!!)
+//
+//                                    cameraListItem.image= captureCamera
+//                                } catch (e: Exception) {
+//
+//                                }
+                            }
+
+                        }
+                        launch (Dispatchers.Main){
+                            adapter.setList(data)
+                        }
+                    }
+
+                }
+
+
             }
             it.onFailure {
                 ToastUtils.showToast(ResponseHandler.getFailureTips(it))
             }
-        }
-        var deviceInfo:EZDeviceInfo?=null
-        lifecycleScope.launch(Dispatchers.IO) {
-            deviceInfo= EZOpenSDK.getInstance().getDeviceInfo("AA1484196")
         }
 
 
@@ -73,18 +99,16 @@ class CameraListActivity : BaseActivity() {
         binding.cameraRc.layoutManager=linearLayoutManager
         binding.cameraRc.adapter=adapter
         mainViewModel.cameraParam.value = GlobalUtil.projectId
-        adapter.setOnItemClickListener(object :OnItemClickListener{
-            override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-                val filter = deviceInfo?.cameraInfoList?.filter {
-                    it.cameraNo == 7
-                }
-                val intent = Intent(this@CameraListActivity, EZPlayBackListActivity::class.java)
-                intent.putExtra(RemoteListContant.QUERY_DATE_INTENT_KEY, DateTimeUtil.getNow())
-                intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, filter?.get(0))
-                intent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, deviceInfo)
-                startActivity(intent)
-            }
-
-        })
+        adapter.setOnItemClickListener { adapter, view, position ->
+//            val filter = deviceInfo?.cameraInfoList?.filter {
+//                it.cameraNo == 7
+//            }
+//            Log.e("onItemClick: ", "__" + deviceInfo?.cameraInfoList?.size?.toString())
+//            val intent = Intent(this@CameraListActivity, EZPlayBackListActivity::class.java)
+//            intent.putExtra(RemoteListContant.QUERY_DATE_INTENT_KEY, DateTimeUtil.getNow())
+//            intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, filter?.get(0))
+//            intent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, deviceInfo)
+//            startActivity(intent)
+        }
     }
 }

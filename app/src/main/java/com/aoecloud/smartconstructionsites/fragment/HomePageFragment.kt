@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,6 +29,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.youth.banner.listener.OnPageChangeListener
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -52,7 +54,20 @@ class HomePageFragment : BaseFragment() {
                 val itemProjectBinding = holder.dataBinding as ItemProjectBinding
                 GlideUtils.loadRoundImage(item.image,6,itemProjectBinding.projectImage)
                 itemProjectBinding.projectName.text = item.project_name
-                itemProjectBinding.projectTime.text = item.insert_time
+                if (!TextUtils.isEmpty(item.insert_time)){
+                    val timeString =  item.insert_time.substring(0,item.insert_time.indexOf("T"))
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+                    val chinaSdf= SimpleDateFormat("yyyy.MM.dd")
+                    try {
+                        val time = sdf.parse(timeString)
+                        val result = chinaSdf.format(time)
+                        itemProjectBinding.projectTime.text = result
+                    } catch (e:Exception) {
+
+                    }
+
+                }
+
                 if (holder.layoutPosition==data.size-1){
                     val layoutParams = holder.itemView.layoutParams
                     if (layoutParams is ViewGroup.MarginLayoutParams){

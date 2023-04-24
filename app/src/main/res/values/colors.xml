@@ -35,8 +35,8 @@
     <color name="page_bg_color">#f8f8f8</color>
     <color name="pureblack">#ff000000</color>
     <color name="black_text">#333333</color>
-    <color name="blue">#205ba9</color>
-    <color name="gray">#adadad</color>
+    <color name="blue">#1E73FF</color>
+    <color name="gray">#AAAAAA</color>
     <color name="cameralist_gray">#e3e3e3</color>
     <color name="page_change_gray">#8f8f8f</color>
 

@@ -10,6 +10,9 @@ data class CameraListItem(
     val id: Int,
     val rtmp: String,
     val rtmpHd: String,
+    var image: String,
+    val online: Int,
+    val channelNo: Int,
     val state: Int,
     val type: String
 )
