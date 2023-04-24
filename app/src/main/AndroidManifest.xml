@@ -49,6 +49,13 @@
             android:name=".camera.PlayActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".camera.EZRealPlayActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".camera.remoteplayback.list.EZPlayBackListActivity"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

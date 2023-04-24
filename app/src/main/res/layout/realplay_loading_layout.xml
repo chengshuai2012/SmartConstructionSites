@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/realplay_loading_rl"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <TextView
+        android:id="@+id/realplay_tip_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="设备不在线"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/realplay_play_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="onClick"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+
+    <LinearLayout
+        android:id="@+id/realplay_privacy_ly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/realplay_privacy_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+         />
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/realplay_page_anim_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />           
+</RelativeLayout>

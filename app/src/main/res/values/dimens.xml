@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- realplay text size -->
+    <dimen name="realplay_text_size">12dp</dimen>
+    <dimen name="realplay_tip_text_size">16dp</dimen>
+    <dimen name="realplay_channel_text_size">9dp</dimen>
+    <dimen name="realplay_button_text_size">15dp</dimen>
+    <dimen name="realplay_ratio_text_size">24dp</dimen>
+    <dimen name="leavemessage_text_size">12dp</dimen>
+    <dimen name="remoteplayback_text_size">12dp</dimen>
+    <dimen name="remoteplayback_tip_text_size">16dp</dimen>
+    <dimen name="remoteplayback_channel_text_size">9dp</dimen>
+    <dimen name="remoteplayback_button_text_size">15dp</dimen>
+    <dimen name="remoteplayback_ratio_text_size">24dp</dimen>
+
+    <!-- 回放列表 -->
+    <dimen name="remotelist_time_text_size">9dp</dimen>
+    <dimen name="remotelist_item_local_time_size">12dp</dimen>
+    <dimen name="remotelist_item_more_text_size">15dp</dimen>
+    <dimen name="remotelist_num_tip_size">12dp</dimen>
+
+    <!-- 引导和登录 -->
+    <dimen name="guide_text_size">15dp</dimen>
+    <dimen name="guide_large_text_size">28dp</dimen>
+    <dimen name="login_text_size">15dp</dimen>
+
+    <dimen name="source_detection_text_size">23dp</dimen>
+    <dimen name="device_set_text_padding">10dp</dimen>
+
+    <dimen name="device_set_small_text_size">13sp</dimen>
+    <dimen name="fourteen">14dp</dimen>
+    <dimen name="botton_text_size">13dp</dimen>
+
+    <!--文字大小-->
+    <dimen name="txt_size_title">20dp</dimen><!--标题文字-->
+    <dimen name="txt_size_content">15dp</dimen><!--正文文字-->
+    <dimen name="txt_size_notify">18dp</dimen>
+
+    <!--控件间距-->
+    <dimen name="margin_line_widget">20dp</dimen>
+
+    <!--功能控件宽度-->
+    <dimen name="width_functional_widget">100dp</dimen>
+
+
+</resources>

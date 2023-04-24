@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aoecloud.smartconstructionsites.R
 import com.aoecloud.smartconstructionsites.base.BaseActivity
 import com.aoecloud.smartconstructionsites.bean.CameraListItem
+import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.EZPlayBackListActivity
+import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.RemoteListContant
 import com.aoecloud.smartconstructionsites.databinding.ActivityCameraListBinding
 import com.aoecloud.smartconstructionsites.databinding.ItemCameraBinding
 import com.aoecloud.smartconstructionsites.network.ResponseHandler
@@ -18,6 +20,9 @@ import com.aoecloud.smartconstructionsites.viewmodel.MainViewModel
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
+import com.videogo.constant.IntentConsts
+import com.videogo.openapi.EZOpenSDK
+import com.videogo.util.DateTimeUtil
 
 class CameraListActivity : BaseActivity() {
     private var _binding: ActivityCameraListBinding? = null
@@ -54,14 +59,21 @@ class CameraListActivity : BaseActivity() {
                 ToastUtils.showToast(ResponseHandler.getFailureTips(it))
             }
         }
-
+        val deviceInfo = EZOpenSDK.getInstance().getDeviceInfo("AA1484196")
+        val filter = deviceInfo.cameraInfoList.filter {
+            it.cameraNo == 7
+        }
         val linearLayoutManager = LinearLayoutManager(this@CameraListActivity)
         binding.cameraRc.layoutManager=linearLayoutManager
         binding.cameraRc.adapter=adapter
         mainViewModel.cameraParam.value = GlobalUtil.projectId
         adapter.setOnItemClickListener(object :OnItemClickListener{
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-                startActivity(Intent(this@CameraListActivity,PlayActivity::class.java))
+                val intent = Intent(this@CameraListActivity, EZPlayBackListActivity::class.java)
+                intent.putExtra(RemoteListContant.QUERY_DATE_INTENT_KEY, DateTimeUtil.getNow())
+                intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, filter[0])
+                intent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, deviceInfo)
+                startActivity(intent)
             }
 
         })

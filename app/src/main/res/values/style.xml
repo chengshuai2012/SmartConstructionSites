@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="TitleBar_Dark">
+        <item name="textColor">@android:color/white</item>
+        <item name="background">@color/black</item>
+        <item name="backButton">@drawable/icon_back</item>
+    </style>
+
+    <declare-styleable name="LiveplayPtzControlAngleView">
+        <attr name="liveplay_angle_style" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+    </declare-styleable>
+
+</resources>
