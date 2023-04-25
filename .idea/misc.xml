@@ -19,8 +19,10 @@
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/fragment_home.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/fragment_mine.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/item_camera.xml" value="0.41379310344827586" />
+        <entry key="app/src/main/res/drawable/border_blue_with_corner.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ez_border.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/drawable/gradient_blue_bg_with_corner.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/gradient_light_blue_bg.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/leave_message_play_selector.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/preview_down_selector.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/drawable/search_button_selector.xml" value="0.13072916666666667" />
@@ -30,15 +32,19 @@
         <entry key="app/src/main/res/drawable/shape_oval_blue.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/shape_oval_qing.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/shape_oval_red.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/shape_ring.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/shape_white_with_corner_16.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_camera_list.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/activity_project.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/ez_play_control.xml" value="0.16576086956521738" />
+        <entry key="app/src/main/res/layout/ez_play_control.xml" value="0.45" />
         <entry key="app/src/main/res/layout/ez_playback_list_page.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/layout/ez_realplay_page.xml" value="0.362962962962963" />
         <entry key="app/src/main/res/layout/ez_realplay_prompt_layout.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/ezopen_realplay_operate_bar.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/ezopen_realplay_operate_bar2.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/item_camera.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/item_project.xml" value="0.22509057971014493" />
         <entry key="app/src/main/res/layout/layout_bottom_navigation_bar.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/layout_change_playback_rate.xml" value="0.23385416666666667" />

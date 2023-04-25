@@ -2,6 +2,7 @@ package com.aoecloud.smartconstructionsites.camera
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -55,19 +56,44 @@ class CameraListActivity : BaseActivity() {
             override fun convert(holder: BaseDataBindingHolder<ItemCameraBinding>, item: CameraListItem) {
                 val itemProjectBinding = holder.dataBinding as ItemCameraBinding
                 itemProjectBinding.data = item
-                GlideUtils.loadWithCorner(item.image,itemProjectBinding.cameraImage,6)
+                if (TextUtils.isEmpty(item.device_type_ico)){
+                    if ("17"==item.type){
+                        itemProjectBinding.cameraImage.setImageResource(R.drawable.icon_round_camare)
+                    }else{
+                        itemProjectBinding.cameraImage.setImageResource(R.drawable.icon_square_camare)
+                    }
+                }else{
+                    GlideUtils.loadWithCorner(item.device_type_ico,itemProjectBinding.cameraImage,6)
+                }
+                itemProjectBinding.nowPlay.setOnClickListener {
+                    val intent = Intent(this@CameraListActivity, EZRealPlayActivity::class.java)
+                    startActivity(intent)
+                }
             }
+        }
+        binding.back.setOnClickListener {
+            finish()
         }
         mainViewModel.cameraData.observe(this){
             it.onSuccess { data->
-                var deviceInfo:EZDeviceInfo?=null
-                if (!data.isNullOrEmpty()){
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        deviceInfo= EZOpenSDK.getInstance().getDeviceInfo(data[0].deviceSerial)
-
-                        data.forEachIndexed {index, cameraListItem ->
-                            if (deviceInfo?.cameraInfoList?.size?:0>index){
-                                val camara = deviceInfo?.cameraInfoList?.get(index)
+                adapter.setList(data)
+                val filter = data.filter { it.online == 0 }
+                binding.cameraCount.text = "${data.size}"
+                if (filter.isNullOrEmpty()){
+                    binding.offlineCount.text= "${data.size}"
+                    binding.onlineCout.text= "0"
+                }else{
+                    binding.offlineCount.text= "${data.size-filter.size}"
+                    binding.onlineCout.text= "${filter.size}"
+                }
+                //       var deviceInfo:EZDeviceInfo?=null
+//                if (!data.isNullOrEmpty()){
+//                    lifecycleScope.launch(Dispatchers.IO) {
+//                        deviceInfo= EZOpenSDK.getInstance().getDeviceInfo(data[0].deviceSerial)
+//
+//                        data.forEachIndexed {index, cameraListItem ->
+//                            if (deviceInfo?.cameraInfoList?.size?:0>index){
+//                                val camara = deviceInfo?.cameraInfoList?.get(index)
 
 //                                try {
 //                                    val captureCamera = EZOpenSDK.getInstance()
@@ -77,15 +103,15 @@ class CameraListActivity : BaseActivity() {
 //                                } catch (e: Exception) {
 //
 //                                }
-                            }
-
-                        }
-                        launch (Dispatchers.Main){
-                            adapter.setList(data)
-                        }
-                    }
-
-                }
+//                            }
+//
+//                        }
+//                        launch (Dispatchers.Main){
+//
+//                        }
+//                    }
+//
+//                }
 
 
             }

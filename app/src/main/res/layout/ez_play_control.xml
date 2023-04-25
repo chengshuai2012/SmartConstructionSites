@@ -3,7 +3,6 @@
     android:id="@+id/realplay_control_rl"
     android:layout_width="match_parent"
     android:layout_height="38dp"
-    android:background="#222222"
     android:gravity="center"
     android:layout_below="@+id/realplay_sv"
     android:orientation="horizontal" >
@@ -15,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/icon_car"
+        android:visibility="gone"
         android:onClick="onClick" />
 
     <View
@@ -29,13 +28,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/icon_energy"
+        android:visibility="gone"
         android:onClick="onClick" />
 	<View
         android:id="@+id/quality_line"
         android:layout_width="1dp"
-        android:layout_height="18dp"
-        android:background="#404040" />
+        android:layout_height="18dp" />
     
     <Button
         android:id="@+id/realplay_quality_btn"
@@ -44,15 +42,14 @@
         android:layout_weight="1"
         android:background="@null"
         android:onClick="onClick"
-        android:text="aaa"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="14sp" />
 
     <View
         android:id="@+id/flow_line"
         android:layout_width="1dp"
-        android:layout_height="18dp"
-        android:background="#404040" />
+        android:layout_height="18dp" />
     <!-- 播放速度 -->
   
     <TextView
@@ -66,15 +63,16 @@
     <View
         android:id="@+id/mirror_line"
         android:layout_width="1dp"
+        android:visibility="gone"
         android:layout_height="18dp"
-        android:background="#404040" />
+   />
 
     <com.videogo.widget.CheckTextButton
         android:id="@+id/fullscreen_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/icon_emp" />
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/icon_full_screen" />
 <!--
     <Button
         android:id="@+id/play_btn"
