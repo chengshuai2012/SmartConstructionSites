@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable-v24/shape_blue_with_corner_8.xml" value="0.2" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable/sel_btn_home.xml" value="0.2" />
+        <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable/shape_blue_with_corner_10.xml" value="0.2" />
+        <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable/shape_ring.xml" value="0.2" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable/shape_white80_with_corner_10.xml" value="0.2" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable/shape_white_with_bottom_corner.xml" value="0.2" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/drawable/shape_white_with_corner.xml" value="0.2" />
@@ -16,9 +18,10 @@
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/activity_play.xml" value="0.4045643153526971" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/activity_project.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/adapter_mine_banner.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/ez_realplay_page.xml" value="0.22" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/fragment_home.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/fragment_mine.xml" value="0.18385416666666668" />
-        <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/item_camera.xml" value="0.41379310344827586" />
+        <entry key="..\:/Users/49488/AndroidStudioProjects/SmartConstructionSites/app/src/main/res/layout/item_camera.xml" value="0.36771300448430494" />
         <entry key="app/src/main/res/drawable/border_blue_with_corner.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ez_border.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/drawable/gradient_blue_bg_with_corner.xml" value="0.25416666666666665" />
