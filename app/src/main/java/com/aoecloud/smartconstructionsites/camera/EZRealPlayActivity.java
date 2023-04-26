@@ -56,6 +56,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.aoecloud.smartconstructionsites.R;
+import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.EZPlayBackListActivity;
 import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.RemoteListContant;
 import com.aoecloud.smartconstructionsites.utils.AudioPlayUtil;
 import com.aoecloud.smartconstructionsites.utils.DataManager;
@@ -63,6 +64,7 @@ import com.aoecloud.smartconstructionsites.utils.DataTimeUtil;
 import com.aoecloud.smartconstructionsites.utils.DemoConfig;
 import com.aoecloud.smartconstructionsites.utils.DimensionUtils;
 import com.aoecloud.smartconstructionsites.utils.EZUtils;
+import com.aoecloud.smartconstructionsites.utils.GlobalUtil;
 import com.aoecloud.smartconstructionsites.utils.ToastUtils;
 import com.aoecloud.smartconstructionsites.utils.VideoFileUtil;
 import com.aoecloud.smartconstructionsites.wedgit.PtzControlAngleView;
@@ -271,6 +273,10 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.replay:
+                EZPlayBackListActivity.launch(this,mCameraInfo.getDeviceSerial(),mCameraInfo.getCameraNo());
+                finish();
+                break;
             case R.id.flow:
                 setQualityMode(EZVideoLevel.VIDEO_LEVEL_FLUNET);
                 flow.setTextColor(Color.parseColor("#AAAAAA"));
@@ -502,6 +508,21 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         ImageView up =  findViewById(R.id.up);
         ImageView left =  findViewById(R.id.left);
         ImageView bottom = findViewById(R.id.bottom);
+        TextView replay = findViewById(R.id.replay);
+        replay.setOnClickListener(this);
+
+        TextView name = findViewById(R.id.name);
+        TextView device_id_text = findViewById(R.id.device_id_text);
+        ImageView cameraImage = findViewById(R.id.camera_image);
+        if (GlobalUtil.INSTANCE.getCameraListItem()!=null){
+            if ("17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
+                cameraImage.setImageResource(R.drawable.icon_round_camare);
+            }else {
+                cameraImage.setImageResource(R.drawable.icon_square_camare);
+            }
+            name.setText(GlobalUtil.INSTANCE.getCameraListItem().getDevice_name());
+            device_id_text.setText(GlobalUtil.INSTANCE.getCameraListItem().getDeviceSerial());
+        }
         ImageView right =  findViewById(R.id.right);
         bigIcon =  findViewById(R.id.big_icon);
         smallIcon = findViewById(R.id.small_icon);

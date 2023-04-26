@@ -5,6 +5,7 @@ import android.text.TextUtils
 import androidx.lifecycle.ViewModelProvider
 import com.aoecloud.smartconstructionsites.base.BaseActivity
 import com.aoecloud.smartconstructionsites.bean.TokenBean
+import com.aoecloud.smartconstructionsites.camera.CustomDialogManager
 import com.aoecloud.smartconstructionsites.databinding.ActivityMainBinding
 import com.aoecloud.smartconstructionsites.utils.InjectorUtil
 import com.aoecloud.smartconstructionsites.utils.SpUtils
@@ -35,6 +36,9 @@ class MainActivity : BaseActivity() {
         binding.homeActivityFragContainer.offscreenPageLimit =2
         binding.homeActivityFragContainer.isUserInputEnabled = false
         initListener()
+        CustomDialogManager.showHowToUpTVDialog(this){
+
+        }
     }
     private fun initListener() {
 

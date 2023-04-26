@@ -1,3 +1,4 @@
 
 rootProject.name = "SmartConstructionSites"
 include ':app'
+include ':calendarview'

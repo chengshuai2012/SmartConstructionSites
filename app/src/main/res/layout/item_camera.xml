@@ -29,6 +29,7 @@
                 android:layout_marginBottom="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_height="80dp"
+                android:layout_marginLeft="14dp"
                 android:id="@+id/camera_image"
                 android:src="@drawable/shape_white_with_corner_10"
                 app:layout_constraintTop_toTopOf="parent"

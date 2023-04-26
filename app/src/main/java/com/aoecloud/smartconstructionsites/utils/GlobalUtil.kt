@@ -27,6 +27,7 @@ import android.os.Environment
 import android.os.Process
 import android.text.TextUtils
 import com.aoecloud.smartconstructionsites.base.BaseApplication
+import com.aoecloud.smartconstructionsites.bean.CameraListItem
 import com.aoecloud.smartconstructionsites.bean.LoginData
 import com.aoecloud.smartconstructionsites.bean.ProjectDataX
 import java.io.File
@@ -40,6 +41,10 @@ import java.util.*
  * @since 17/2/18
  */
 object GlobalUtil {
+    var loginData: LoginData?=null
+    var projectId: String=""
+    var chooseProject: ProjectDataX?=null
+    var cameraListItem: CameraListItem?=null
     private fun isExternalStorageWritable(): Boolean {
         val state: String
         state = try {
@@ -67,9 +72,7 @@ object GlobalUtil {
     val appPackage: String
         get() = BaseApplication.context.packageName
 
-    var loginData: LoginData?=null
-    var projectId: String=""
-    var chooseProject: ProjectDataX?=null
+
 
     /**
      * 获取当前应用程序的名称。

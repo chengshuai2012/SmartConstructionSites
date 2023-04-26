@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -218,24 +219,7 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             holder.text2 = (TextView) convertView.findViewById(R.id.text2);
             holder.text3 = (TextView) convertView.findViewById(R.id.text3);
 
-            holder.layout1 = (LinearLayout) convertView.findViewById(R.id.local_l1);
-            holder.layout2 = (LinearLayout) convertView.findViewById(R.id.local_l2);
-            holder.layout3 = (LinearLayout) convertView.findViewById(R.id.local_l3);
 
-            holder.localTimePart1 = (TextView) convertView.findViewById(R.id.local_time_part1);
-            holder.localTimePart2 = (TextView) convertView.findViewById(R.id.local_time_part2);
-            holder.localTimePart3 = (TextView) convertView.findViewById(R.id.local_time_part3);
-
-            holder.localAlarm1 = (ImageView) convertView.findViewById(R.id.local_alarm1);
-            holder.localAlarm2 = (ImageView) convertView.findViewById(R.id.local_alarm2);
-            holder.localAlarm3 = (ImageView) convertView.findViewById(R.id.local_alarm3);
-
-            holder.check1 = (CheckBox) convertView.findViewById(R.id.check1);
-            holder.check2 = (CheckBox) convertView.findViewById(R.id.check2);
-            holder.check3 = (CheckBox) convertView.findViewById(R.id.check3);
-
-            holder.moreBtn = (TextView) convertView.findViewById(R.id.more_btn);
-            holder.moreLayout = (LinearLayout) convertView.findViewById(R.id.layout_more_ly);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -249,106 +233,66 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             convertView.findViewById(R.id.header_parent).setVisibility(View.GONE);
             convertView.findViewById(R.id.layout).setVisibility(View.GONE);
             convertView.findViewById(R.id.header).setVisibility(View.GONE);
-            holder.moreBtn.setVisibility(View.VISIBLE);
-            holder.moreLayout.setVisibility(View.VISIBLE);
-            if (isEdit) {
-                holder.moreBtn.setText(R.string.local_video_not_delete);
-                holder.moreBtn.setTextColor(inflater.getContext().getResources().getColor(R.color.common_hint_text));
-                holder.moreLayout.setOnClickListener(null);
-                int resId = R.drawable.put_ico;
-                Drawable drawable = linkedAdapter.getContext().getResources().getDrawable(resId);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                holder.moreBtn.setCompoundDrawables(null, null, drawable, null);
-            } else {
-                holder.moreBtn.setText(R.string.more_local_image);
-                holder.moreBtn.setTextColor(inflater.getContext().getResources().getColor(R.color.more_color));
-                holder.moreLayout.setOnClickListener(new OnHikMoreClickListener(holder.moreBtn));
-                int resId = isExpand ? R.drawable.playback_more_up1 : R.drawable.playback_more_down1;
-                Drawable drawable = linkedAdapter.getContext().getResources().getDrawable(resId);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                holder.moreBtn.setCompoundDrawables(null, null, drawable, null);
-            }
+
             return convertView;
         } else {
             convertView.findViewById(R.id.header_parent).setVisibility(View.VISIBLE);
             convertView.findViewById(R.id.layout).setVisibility(View.VISIBLE);
             convertView.findViewById(R.id.header).setVisibility(View.VISIBLE);
-            holder.moreBtn.setVisibility(View.GONE);
-            holder.moreLayout.setVisibility(View.GONE);
+
         }
         final CloudPartInfoFile dataOne = fileEx.getDataOne();
         final CloudPartInfoFile dataTwo = fileEx.getDataTwo();
         final CloudPartInfoFile dataThree = fileEx.getDataThree();
         String headHour = fileEx.getHeadHour();
         if (headHour != null) {
-            holder.header.setText(getSpannableString(headHour));
+            holder.header.setText(headHour);
         }
         if (dataOne != null) {
+            Log.e( "getView: ",dataOne.getPicUrl()+"___"+dataOne.isCloud() );
             if (dataOne.getBitmap() != null) {
                 holder.image1.setImageBitmap(dataOne.getBitmap());
             } else {
-                holder.image1.setImageResource(R.drawable.icon_any);
+                holder.image1.setImageResource(R.drawable.icon_replace);
             }
             if (dataOne.isCloud()) {
                 loadCoverPic(dataOne, holder.image1);
-                if (isEdit) {
-                    holder.check1.setVisibility(View.VISIBLE);
-                } else {
-                    holder.check1.setVisibility(View.GONE);
-                }
             } else {
-                holder.check1.setVisibility(View.GONE);
+
             }
             holder.text1.setVisibility(View.VISIBLE);
             holder.text1.setText(getDate(Utils.convert14Calender(dataOne.getStartTime())));
-            holder.layout1.setVisibility(View.GONE);
             if (dataOne.getPosition() == selPosition && !isEdit) {
                 holder.image1.setSelected(true);
             } else {
                 holder.image1.setSelected(false);
             }
-            holder.image1.setOnClickListener(new OnHikClickListener(dataOne, position, holder.check1));
+            holder.image1.setOnClickListener(new OnHikClickListener(dataOne, position));
             holder.image1.setVisibility(View.VISIBLE);
-            holder.check1.setOnCheckedChangeListener(new OnHikCheckedChangeListener(dataOne));
-            if (selectedCloudFiles.containsKey(dataOne.getFileId())) {
-                holder.check1.setChecked(true);
-            } else {
-                holder.check1.setChecked(false);
-            }
+
         } else {
             holder.image1.setVisibility(View.GONE);
             holder.text1.setVisibility(View.GONE);
-            holder.layout1.setVisibility(View.GONE);
-            holder.check1.setVisibility(View.GONE);
+
         }
 
         if (dataTwo != null) {
             if (dataTwo.getBitmap() != null) {
                 holder.image2.setImageBitmap(dataTwo.getBitmap());
             } else {
-                holder.image2.setImageResource(R.drawable.icon_any);
+                holder.image2.setImageResource(R.drawable.icon_replace);
             }
             if (dataTwo.isCloud()) {
                 loadCoverPic(dataTwo, holder.image2);
-                if (isEdit) {
-                    holder.check2.setVisibility(View.VISIBLE);
-                } else {
-                    holder.check2.setVisibility(View.GONE);
-                }
+
             } else {
-                holder.check2.setVisibility(View.GONE);
+
             }
             holder.text2.setVisibility(View.VISIBLE);
             holder.text2.setText(getDate(Utils.convert14Calender(dataTwo.getStartTime())));
-            holder.layout2.setVisibility(View.GONE);
             holder.image2.setVisibility(View.VISIBLE);
-            holder.image2.setOnClickListener(new OnHikClickListener(dataTwo, position, holder.check2));
-            holder.check2.setOnCheckedChangeListener(new OnHikCheckedChangeListener(dataTwo));
-            if (selectedCloudFiles.containsKey(dataTwo.getFileId())) {
-                holder.check2.setChecked(true);
-            } else {
-                holder.check2.setChecked(false);
-            }
+            holder.image2.setOnClickListener(new OnHikClickListener(dataTwo, position));
+
             if (dataTwo.getPosition() == selPosition && !isEdit) {
                 holder.image2.setSelected(true);
             } else {
@@ -357,37 +301,25 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
         } else {
             holder.image2.setVisibility(View.GONE);
             holder.text2.setVisibility(View.GONE);
-            holder.layout2.setVisibility(View.GONE);
-            holder.check2.setVisibility(View.GONE);
         }
 
         if (dataThree != null) {
             if (dataThree.getBitmap() != null) {
                 holder.image3.setImageBitmap(dataThree.getBitmap());
             } else {
-                holder.image3.setImageResource(R.drawable.icon_any);
+                holder.image3.setImageResource(R.drawable.icon_replace);
             }
             if (dataThree.isCloud()) {
                 loadCoverPic(dataThree, holder.image3);
-                if (isEdit) {
-                    holder.check3.setVisibility(View.VISIBLE);
-                } else {
-                    holder.check3.setVisibility(View.GONE);
-                }
+
             } else {
-                holder.check3.setVisibility(View.GONE);
+
             }
             holder.text3.setVisibility(View.VISIBLE);
             holder.text3.setText(getDate(Utils.convert14Calender(dataThree.getStartTime())));
-            holder.layout3.setVisibility(View.GONE);
             holder.image3.setVisibility(View.VISIBLE);
-            holder.image3.setOnClickListener(new OnHikClickListener(dataThree, position, holder.check3));
-            holder.check3.setOnCheckedChangeListener(new OnHikCheckedChangeListener(dataThree));
-            if (selectedCloudFiles.containsKey(dataThree.getFileId())) {
-                holder.check3.setChecked(true);
-            } else {
-                holder.check3.setChecked(false);
-            }
+            holder.image3.setOnClickListener(new OnHikClickListener(dataThree, position));
+
             if (dataThree.getPosition() == selPosition && !isEdit) {
                 holder.image3.setSelected(true);
             } else {
@@ -396,20 +328,11 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
         } else {
             holder.image3.setVisibility(View.GONE);
             holder.text3.setVisibility(View.GONE);
-            holder.layout3.setVisibility(View.GONE);
-            holder.check3.setVisibility(View.GONE);
+
         }
 
         int section = getSectionForPosition(position);
         int indexPosition = getPositionForSection(section);
-        // 如果是分组所在行则显示标题
-        if (indexPosition == position) {
-            // 显示标题
-            holder.header.setVisibility(View.VISIBLE);
-        } else {
-            // 隐藏标题
-            holder.header.setVisibility(View.GONE);
-        }
 
         return convertView;
     }
@@ -470,9 +393,8 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
 
         private CheckBox checkBox;
 
-        public OnHikClickListener(CloudPartInfoFile cloudFile, int position, CheckBox checkBox) {
+        public OnHikClickListener(CloudPartInfoFile cloudFile, int position) {
             this.cloudFile = cloudFile;
-            this.checkBox = checkBox;
             int type = cloudFile.isCloud() ? RemoteListContant.TYPE_CLOUD : RemoteListContant.TYPE_LOCAL;
             clickedListItem = new ClickedListItem(cloudFile.getPosition(), type, cloudFile.getStartMillis(),
                     cloudFile.getEndMillis(), position);
@@ -580,27 +502,12 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
 
         ImageView image1;
         TextView text1;
-        LinearLayout layout1;
-        TextView localTimePart1;
-        ImageView localAlarm1;
-        CheckBox check1;
 
         ImageView image2;
         TextView text2;
-        LinearLayout layout2;
-        TextView localTimePart2;
-        ImageView localAlarm2;
-        CheckBox check2;
 
         ImageView image3;
         TextView text3;
-        LinearLayout layout3;
-        TextView localTimePart3;
-        ImageView localAlarm3;
-        CheckBox check3;
-
-        TextView moreBtn;
-        LinearLayout moreLayout;
     }
 
     @Override
