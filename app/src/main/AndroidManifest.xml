@@ -55,6 +55,7 @@
             android:exported="true">
         </activity>
         <activity android:name=".camera.remoteplayback.list.EZPlayBackListActivity"
+            android:configChanges="orientation|keyboard|layoutDirection|screenSize"
             android:exported="true"
             />
     </application>

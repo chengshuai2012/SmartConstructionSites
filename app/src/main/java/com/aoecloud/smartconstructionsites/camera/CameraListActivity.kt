@@ -66,8 +66,11 @@ class CameraListActivity : BaseActivity() {
                     GlideUtils.loadWithCorner(item.device_type_ico,itemProjectBinding.cameraImage,6)
                 }
                 itemProjectBinding.nowPlay.setOnClickListener {
-                    val intent = Intent(this@CameraListActivity, EZRealPlayActivity::class.java)
-                    startActivity(intent)
+                    EZRealPlayActivity.launch(this@CameraListActivity,"AA1484196",7)
+
+                }
+                itemProjectBinding.replay.setOnClickListener {
+                    EZPlayBackListActivity.launch(this@CameraListActivity,"AA1484196",7)
                 }
             }
         }

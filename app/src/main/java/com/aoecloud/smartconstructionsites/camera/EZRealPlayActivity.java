@@ -56,6 +56,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.aoecloud.smartconstructionsites.R;
+import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.RemoteListContant;
 import com.aoecloud.smartconstructionsites.utils.AudioPlayUtil;
 import com.aoecloud.smartconstructionsites.utils.DataManager;
 import com.aoecloud.smartconstructionsites.utils.DataTimeUtil;
@@ -85,6 +86,7 @@ import com.videogo.openapi.bean.EZPMPlayPrivateTokenInfo;
 import com.videogo.openapi.bean.EZVideoQualityInfo;
 import com.videogo.realplay.RealPlayStatus;
 import com.videogo.util.ConnectionDetector;
+import com.videogo.util.DateTimeUtil;
 import com.videogo.util.LocalInfo;
 import com.videogo.util.LogUtil;
 import com.videogo.util.MediaScanner;
@@ -99,6 +101,7 @@ import org.MediaPlayer.PlayM4.Player;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -425,9 +428,13 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         }
         finish();
     }
-
+    private EZCameraInfo mCameraInfo=null;
     private void initData() {
         // 初始化mLocalInfo，记录屏幕尺寸信息
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mCameraInfo = getIntent().getParcelableExtra(IntentConsts.EXTRA_CAMERA_INFO);
+        }
         mLocalInfo = LocalInfo.getInstance();
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -765,7 +772,7 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         new Thread(() -> {
             boolean ptz_result = false;
             try {
-                ptz_result = ezOpenSDK.controlPTZ("AA1484196",7, command,
+                ptz_result = ezOpenSDK.controlPTZ(mCameraInfo.getDeviceSerial(),mCameraInfo.getCameraNo(), command,
                         action, EZConstants.PTZ_SPEED_DEFAULT);
                 if (action == EZPTZAction.EZPTZActionSTOP) {
                     Message msg = Message.obtain();
@@ -874,7 +881,7 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
             Thread thr = new Thread(() -> {
                 try {
                     // need to modify by yudan at 08-11
-                    ezOpenSDK.setVideoLevel("AA1484196", 7, mode.getVideoLevel());
+                    ezOpenSDK.setVideoLevel(mCameraInfo.getDeviceSerial(), mCameraInfo.getCameraNo(), mode.getVideoLevel());
                     mCurrentQulityMode = mode;
                     Message msg = Message.obtain();
                     msg.what = EZConstants.EZRealPlayConstants.MSG_SET_VEDIOMODE_SUCCESS;
@@ -1005,7 +1012,7 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         mStatus = RealPlayStatus.STATUS_START;
 
 
-            mEZPlayer = ezOpenSDK.createPlayer("AA1484196", 7);
+            mEZPlayer = ezOpenSDK.createPlayer(mCameraInfo.getDeviceSerial(), mCameraInfo.getCameraNo());
             if (mEZPlayer == null)
                 return;
             mEZPlayer.setHandler(mHandler);

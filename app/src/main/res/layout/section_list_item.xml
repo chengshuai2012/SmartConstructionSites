@@ -7,9 +7,9 @@
     android:gravity="center"
     android:orientation="horizontal" >
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_parent"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:gravity="center_vertical|right" >
 
@@ -31,7 +31,7 @@
             android:textColor="#888888"
             android:textSize="10dp"
             android:textStyle="bold" />
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -237,26 +237,6 @@
                 android:layout_height="fill_parent" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_more_ly"
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/icon_home"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/more_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/playback_more_down1"
-                android:gravity="center"
-                android:text="@string/more_local_image"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/remotelist_item_more_text_size" />
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
