@@ -514,12 +514,16 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         TextView name = findViewById(R.id.name);
         TextView device_id_text = findViewById(R.id.device_id_text);
         ImageView cameraImage = findViewById(R.id.camera_image);
+        ConstraintLayout control_cl = findViewById(R.id.control_cl);
         if (GlobalUtil.INSTANCE.getCameraListItem()!=null){
             if ("17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
                 cameraImage.setImageResource(R.drawable.icon_round_camare);
+                control_cl.setVisibility(View.VISIBLE);
             }else {
                 cameraImage.setImageResource(R.drawable.icon_square_camare);
+                control_cl.setVisibility(View.GONE);
             }
+
             name.setText(GlobalUtil.INSTANCE.getCameraListItem().getDevice_name());
             device_id_text.setText(GlobalUtil.INSTANCE.getCameraListItem().getDeviceSerial());
         }

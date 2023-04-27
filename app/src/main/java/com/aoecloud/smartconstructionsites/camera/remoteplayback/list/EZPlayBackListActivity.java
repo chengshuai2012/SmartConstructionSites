@@ -81,6 +81,7 @@ import androidx.core.content.ContextCompat;
 
 import com.aoecloud.smartconstructionsites.R;
 import com.aoecloud.smartconstructionsites.base.BaseApplication;
+import com.aoecloud.smartconstructionsites.camera.CustomDialogManager;
 import com.aoecloud.smartconstructionsites.camera.EZRealPlayActivity;
 import com.aoecloud.smartconstructionsites.camera.RootActivity;
 import com.aoecloud.smartconstructionsites.camera.remoteplayback.list.bean.ClickedListItem;
@@ -147,6 +148,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 
 
 @SuppressLint({"DefaultLocale", "HandlerLeak", "NewApi"})
@@ -586,6 +591,7 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
             LogUtil.d(TAG, "cameraInfo is null");
             finish();
         }
+
         ImageView mBack =  findViewById(R.id.back);
         mBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -618,6 +624,21 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
         }
         TextView name = findViewById(R.id.name);
         TextView device_id_text = findViewById(R.id.device_id_text);
+        TextView title_control = findViewById(R.id.title_control);
+        ImageView chooseDay = findViewById(R.id.choose_day);
+        title_control.setText(DateTimeUtil.formatDateToString(queryDate,"MM.dd"));
+        chooseDay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialogManager.INSTANCE.showHowToUpTVDialog(EZPlayBackListActivity.this,queryDate, s -> {
+                    queryDate = DateTimeUtil.parseStringToDate(s, DateTimeUtil.DAY_FORMAT);
+                    title_control.setText(DateTimeUtil.formatDateToString(queryDate,"MM.dd"));
+                    onDateChanged();
+                    return null;
+                });
+            }
+        });
+
         TextView replay = findViewById(R.id.replay);
         replay.setOnClickListener(this);
         ImageView cameraImage = findViewById(R.id.camera_image);
@@ -1331,20 +1352,7 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
     }
 
     private void onDateChanged() {
-
-        switch (mRecordType) {
-            case RemoteListContant.TYPE_CLOUD:
-                mDeviceRecordsAdapter = null;
-                startQueryCloudRecordFiles();
-                break;
-            case RemoteListContant.TYPE_LOCAL:
-                mCloudRecordsAdapter = null;
-                startQueryDeviceRecordFiles();
-                break;
-            default:
-                // do nothing
-                break;
-        }
+        startQueryDeviceRecordFiles();
     }
 
     private void startQueryCloudRecordFiles() {
@@ -1738,17 +1746,6 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
         showTab(R.id.content_tab_device_root);
         mPinnedHeaderListViewForLocal.setVisibility(View.VISIBLE);
 
-        if (mDeviceRecordsAdapter != null) {
-            mDeviceRecordsAdapter.clear();
-            mDeviceRecordsAdapter.addLocalFileExAll(cloudPartInfoFileExs);
-            mDeviceRecordsAdapter.notifyDataSetChanged();
-            int selPosition = mDeviceRecordsAdapter.getCloudFileEx().size() - 2;
-            if (getAndroidOSVersion() < 14) {
-                mPinnedHeaderListViewForLocal.setSelection(selPosition > 0 ? selPosition : 0);
-            } else {
-                mPinnedHeaderListViewForLocal.smoothScrollToPositionFromTop(selPosition > 0 ? selPosition : 0, 100, 500);
-            }
-        } else {
             mDeviceRecordsAdapter = new StandardArrayAdapter(this, R.id.layout, cloudPartInfoFileExs);
             mDeviceRecordsAdapter.setAdapterChangeListener(this);
             mSectionAdapterForLocal = new SectionListAdapter(EZPlayBackListActivity.this, getLayoutInflater(),
@@ -1757,7 +1754,7 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
             mPinnedHeaderListViewForLocal.setOnScrollListener(mSectionAdapterForLocal);
 
             mSectionAdapterForLocal.setOnHikItemClickListener(EZPlayBackListActivity.this);
-        }
+
         if (!EzvizAPI.getInstance().isUsingGlobalSDK()) {
             // 去获取SD卡视频封面
             List<EZDeviceRecordFile> recordFiles = new ArrayList<>();

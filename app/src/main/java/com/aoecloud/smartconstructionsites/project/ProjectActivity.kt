@@ -59,6 +59,10 @@ class ProjectActivity : BaseActivity() {
                 binding.energyNowCountText.text = "${data.total_power_consumption}"
                 binding.deviceManagerCountText.text = "${data.device_count}"
                 binding.carNowCountText.text = "${data.car_count}"
+                binding.buildingSizeText.text = "${data.floor}m²"
+                binding.buildingHeightText.text = "${data.floor}层"
+                binding.buildingAddText.text = "${data.project_address}"
+                binding.buildingPlanText.text = "${data.complete_date}"
             }
             it.onFailure { e->
                 ToastUtils.showToast(ResponseHandler.getFailureTips(e))

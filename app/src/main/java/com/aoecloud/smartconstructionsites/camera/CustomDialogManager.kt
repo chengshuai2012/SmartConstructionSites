@@ -4,14 +4,15 @@ import android.content.Context
 import android.view.Gravity
 import android.view.WindowManager
 import com.aoecloud.smartconstructionsites.R
+import java.util.*
 
 
 object CustomDialogManager {
 
-    fun showHowToUpTVDialog(context: Context,callBack: () -> Unit) {
-        val howToUpTVDialog = ChooseDayDialog.getInstance(context)
+    fun showHowToUpTVDialog(context: Context, date: Date, callBack: (String) -> Unit) {
+        val howToUpTVDialog = ChooseDayDialog.getInstance(context,date)
         howToUpTVDialog.onDialogClickListener = {
-
+            callBack.invoke(it)
         }
         howToUpTVDialog.show()
         val window = howToUpTVDialog.window

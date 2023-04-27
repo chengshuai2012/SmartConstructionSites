@@ -19,7 +19,8 @@
             android:layout_height="24dp"
             android:layout_marginLeft="40dp"
             android:background="@drawable/last"
-            android:onClick="lastMonth" />
+            android:id="@+id/last"
+             />
 
         <TextView
             android:id="@+id/title"
@@ -36,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="40dp"
             android:background="@drawable/next"
-            android:onClick="nextMonth" />
+            android:id="@+id/next"/>
 
     </RelativeLayout>
 

@@ -289,6 +289,7 @@
                 android:padding="7dp"
                 android:layout_marginLeft="2dp"
                 android:src="@drawable/icon_choose_day"
+                android:id="@+id/choose_day"
                 app:layout_constraintTop_toTopOf="@+id/title_control"
                 app:layout_constraintBottom_toBottomOf="@+id/title_control"
                 app:layout_constraintLeft_toRightOf="@+id/title_control"

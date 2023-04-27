@@ -157,6 +157,7 @@ public class StandardArrayAdapter extends ArrayAdapter<CloudPartInfoFileEx> {
 
     public void addLocalFileExAll() {
         if (localFileExAll != null) {
+            items.clear();
             items.addAll(localFileExAll);
             this.notifyDataSetChanged();
         }

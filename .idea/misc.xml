@@ -48,7 +48,8 @@
         <entry key="app/src/main/res/drawable/shape_white_with_corner_16.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_camera_list.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.223731884057971" />
-        <entry key="app/src/main/res/layout/activity_project.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_project.xml" value="0.3977777777777778" />
+        <entry key="app/src/main/res/layout/dialog_choose_day.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/ez_play_control.xml" value="0.45" />
         <entry key="app/src/main/res/layout/ez_playback_list_page.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/ez_realplay_page.xml" value="0.362962962962963" />
@@ -56,6 +57,7 @@
         <entry key="app/src/main/res/layout/ezopen_realplay_operate_bar.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/ezopen_realplay_operate_bar2.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/item_camera.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/item_project.xml" value="0.22509057971014493" />
         <entry key="app/src/main/res/layout/layout_bottom_navigation_bar.xml" value="0.223731884057971" />
@@ -63,9 +65,10 @@
         <entry key="app/src/main/res/layout/list_section.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/realplay_full_operate_layout.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/realplay_loading_layout.xml" value="0.16576086956521738" />
-        <entry key="app/src/main/res/layout/section_list_item.xml" value="0.30134680134680136" />
+        <entry key="app/src/main/res/layout/section_list_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/trm_item_popup_menu_list.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/trm_popup_menu.xml" value="0.23385416666666667" />
+        <entry key="calendarview/src/main/res/drawable/shape_oval_blue.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

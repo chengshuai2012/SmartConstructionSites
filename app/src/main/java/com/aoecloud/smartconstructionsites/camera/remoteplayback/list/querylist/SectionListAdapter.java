@@ -215,10 +215,6 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             holder.image3.setDrawingCacheEnabled(false);
             holder.image3.setWillNotCacheDrawing(true);
 
-            holder.text1 = (TextView) convertView.findViewById(R.id.text1);
-            holder.text2 = (TextView) convertView.findViewById(R.id.text2);
-            holder.text3 = (TextView) convertView.findViewById(R.id.text3);
-
 
             convertView.setTag(holder);
         } else {
@@ -260,9 +256,7 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             } else {
 
             }
-            holder.text1.setVisibility(View.VISIBLE);
-            holder.text1.setText(getDate(Utils.convert14Calender(dataOne.getStartTime())));
-            if (dataOne.getPosition() == selPosition && !isEdit) {
+           if (dataOne.getPosition() == selPosition && !isEdit) {
                 holder.image1.setSelected(true);
             } else {
                 holder.image1.setSelected(false);
@@ -272,7 +266,7 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
 
         } else {
             holder.image1.setVisibility(View.GONE);
-            holder.text1.setVisibility(View.GONE);
+
 
         }
 
@@ -288,8 +282,6 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             } else {
 
             }
-            holder.text2.setVisibility(View.VISIBLE);
-            holder.text2.setText(getDate(Utils.convert14Calender(dataTwo.getStartTime())));
             holder.image2.setVisibility(View.VISIBLE);
             holder.image2.setOnClickListener(new OnHikClickListener(dataTwo, position));
 
@@ -300,7 +292,6 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             }
         } else {
             holder.image2.setVisibility(View.GONE);
-            holder.text2.setVisibility(View.GONE);
         }
 
         if (dataThree != null) {
@@ -315,9 +306,7 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             } else {
 
             }
-            holder.text3.setVisibility(View.VISIBLE);
-            holder.text3.setText(getDate(Utils.convert14Calender(dataThree.getStartTime())));
-            holder.image3.setVisibility(View.VISIBLE);
+           holder.image3.setVisibility(View.VISIBLE);
             holder.image3.setOnClickListener(new OnHikClickListener(dataThree, position));
 
             if (dataThree.getPosition() == selPosition && !isEdit) {
@@ -327,7 +316,6 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
             }
         } else {
             holder.image3.setVisibility(View.GONE);
-            holder.text3.setVisibility(View.GONE);
 
         }
 
@@ -501,13 +489,12 @@ public class SectionListAdapter implements ListAdapter, OnItemClickListener, Pin
         TextView header;
 
         ImageView image1;
-        TextView text1;
+
 
         ImageView image2;
-        TextView text2;
+
 
         ImageView image3;
-        TextView text3;
     }
 
     @Override

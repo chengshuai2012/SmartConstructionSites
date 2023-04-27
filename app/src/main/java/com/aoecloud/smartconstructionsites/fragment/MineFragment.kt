@@ -48,7 +48,7 @@ class MineFragment : BaseFragment() {
         mainViewModel.bindParam.value = GlobalUtil.loginData?.id?:""
         mainViewModel.bindData.observe(requireActivity()){
             it.onSuccess {
-                binding.account.text = GlobalUtil.loginData?.username?:""
+                binding.account.text = it.nickname
                 binding.phoneNumber.text = it.contact_tel
                 binding.role.text = it.user_type
                 if (it.type=="1"){
@@ -58,6 +58,7 @@ class MineFragment : BaseFragment() {
                     binding.bindStatus.text = "未绑定"
                     binding.bindStatusImage.visibility = View.VISIBLE
                 }
+                binding.company.text = it.enterprise_name
 
             }
             it.onFailure {

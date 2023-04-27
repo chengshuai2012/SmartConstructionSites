@@ -36,9 +36,6 @@ class MainActivity : BaseActivity() {
         binding.homeActivityFragContainer.offscreenPageLimit =2
         binding.homeActivityFragContainer.isUserInputEnabled = false
         initListener()
-        CustomDialogManager.showHowToUpTVDialog(this){
-
-        }
     }
     private fun initListener() {
 

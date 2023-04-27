@@ -67,12 +67,12 @@ class CameraListActivity : BaseActivity() {
                 }
                 itemProjectBinding.nowPlay.setOnClickListener {
                     GlobalUtil.cameraListItem = item
-                    EZRealPlayActivity.launch(this@CameraListActivity,"AA1484196",7)
+                    EZRealPlayActivity.launch(this@CameraListActivity,item.deviceSerial,7)
 
                 }
                 itemProjectBinding.replay.setOnClickListener {
                     GlobalUtil.cameraListItem = item
-                    EZPlayBackListActivity.launch(this@CameraListActivity,"AA1484196",7)
+                    EZPlayBackListActivity.launch(this@CameraListActivity,item.deviceSerial,7)
                 }
             }
         }
