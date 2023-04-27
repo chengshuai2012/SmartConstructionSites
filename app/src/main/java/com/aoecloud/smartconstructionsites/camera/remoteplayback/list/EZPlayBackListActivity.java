@@ -100,6 +100,7 @@ import com.aoecloud.smartconstructionsites.utils.DataTimeUtil;
 import com.aoecloud.smartconstructionsites.utils.DemoConfig;
 import com.aoecloud.smartconstructionsites.utils.DimensionUtils;
 import com.aoecloud.smartconstructionsites.utils.EZUtils;
+import com.aoecloud.smartconstructionsites.utils.GlideUtils;
 import com.aoecloud.smartconstructionsites.utils.GlobalUtil;
 import com.aoecloud.smartconstructionsites.utils.VideoFileUtil;
 import com.aoecloud.smartconstructionsites.wedgit.ScreenOrientationHelper;
@@ -642,12 +643,20 @@ public class EZPlayBackListActivity extends RootActivity implements QueryPlayBac
         TextView replay = findViewById(R.id.replay);
         replay.setOnClickListener(this);
         ImageView cameraImage = findViewById(R.id.camera_image);
+        TextView area_text = findViewById(R.id.area_text);
         if (GlobalUtil.INSTANCE.getCameraListItem()!=null){
-            if ("17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
-                cameraImage.setImageResource(R.drawable.icon_round_camare);
+            if (TextUtils.isEmpty(GlobalUtil.INSTANCE.getCameraListItem().getDevice_type_ico())){
+                if ("17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
+                    cameraImage.setImageResource(R.drawable.icon_round_camare);
+
+                }else {
+                    cameraImage.setImageResource(R.drawable.icon_square_camare);
+                }
             }else {
-                cameraImage.setImageResource(R.drawable.icon_square_camare);
+                GlideUtils.INSTANCE.load(GlobalUtil.INSTANCE.getCameraListItem().getDevice_type_ico(),cameraImage);
             }
+
+            area_text.setText(GlobalUtil.INSTANCE.getCameraListItem().getSn_id());
             name.setText(GlobalUtil.INSTANCE.getCameraListItem().getDevice_name());
             device_id_text.setText(GlobalUtil.INSTANCE.getCameraListItem().getDeviceSerial());
         }

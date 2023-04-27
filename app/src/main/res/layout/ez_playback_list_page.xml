@@ -223,7 +223,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
                     app:layout_constraintLeft_toLeftOf="@+id/name"
                     android:layout_marginTop="14dp"
                     android:textSize="14sp"
@@ -241,6 +241,27 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:id="@+id/device_id_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/device_id"
+                    app:layout_constraintLeft_toLeftOf="@+id/name"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="序 列 号"
+                    android:textColor="#999999"
+                    android:id="@+id/area"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/area"
+                    app:layout_constraintLeft_toRightOf="@+id/area"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/area_text"
                     />
 
                 <TextView

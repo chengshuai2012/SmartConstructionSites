@@ -64,6 +64,7 @@ import com.aoecloud.smartconstructionsites.utils.DataTimeUtil;
 import com.aoecloud.smartconstructionsites.utils.DemoConfig;
 import com.aoecloud.smartconstructionsites.utils.DimensionUtils;
 import com.aoecloud.smartconstructionsites.utils.EZUtils;
+import com.aoecloud.smartconstructionsites.utils.GlideUtils;
 import com.aoecloud.smartconstructionsites.utils.GlobalUtil;
 import com.aoecloud.smartconstructionsites.utils.ToastUtils;
 import com.aoecloud.smartconstructionsites.utils.VideoFileUtil;
@@ -515,15 +516,21 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         TextView device_id_text = findViewById(R.id.device_id_text);
         ImageView cameraImage = findViewById(R.id.camera_image);
         ConstraintLayout control_cl = findViewById(R.id.control_cl);
+        TextView area_text = findViewById(R.id.area_text);
         if (GlobalUtil.INSTANCE.getCameraListItem()!=null){
-            if ("17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
+            if (TextUtils.isEmpty(GlobalUtil.INSTANCE.getCameraListItem().getDevice_type_ico())){
+               if ("17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
                 cameraImage.setImageResource(R.drawable.icon_round_camare);
                 control_cl.setVisibility(View.VISIBLE);
             }else {
                 cameraImage.setImageResource(R.drawable.icon_square_camare);
                 control_cl.setVisibility(View.GONE);
             }
+            }else {
+                GlideUtils.INSTANCE.load(GlobalUtil.INSTANCE.getCameraListItem().getDevice_type_ico(),cameraImage);
+            }
 
+            area_text.setText(GlobalUtil.INSTANCE.getCameraListItem().getSn_id());
             name.setText(GlobalUtil.INSTANCE.getCameraListItem().getDevice_name());
             device_id_text.setText(GlobalUtil.INSTANCE.getCameraListItem().getDeviceSerial());
         }

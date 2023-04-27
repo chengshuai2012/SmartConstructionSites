@@ -8,7 +8,7 @@ data class ProjectData(
     val knowledge_count: Int,
     val floor: String,
     val temperature: Double,
-    val loor_area: Double,
+    val floor_area: Double,
     val total_power_consumption: Double,
     val project_address: String,
     val complete_date:String,
