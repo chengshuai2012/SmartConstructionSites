@@ -494,9 +494,10 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
 
     }
     TextView hd,flow;
-    LinearLayout llBig,llSmall;
+    LinearLayout llBig,llSmall,ll_small_full,ll_big_full,size_ll;
     ImageView bigIcon,smallIcon;
     TextView big,small;
+    ConstraintLayout control_cl_full;
     private void initView() {
         setContentView(R.layout.ez_realplay_page);
         // 保持屏幕常亮 Keep the screen on
@@ -509,6 +510,10 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         ImageView up =  findViewById(R.id.up);
         ImageView left =  findViewById(R.id.left);
         ImageView bottom = findViewById(R.id.bottom);
+        ImageView bottom_full = findViewById(R.id.bottom_full);
+        ImageView left_full = findViewById(R.id.left_full);
+        ImageView up_full = findViewById(R.id.up_full);
+        ImageView right_full = findViewById(R.id.right_full);
         TextView replay = findViewById(R.id.replay);
         replay.setOnClickListener(this);
 
@@ -516,6 +521,7 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         TextView device_id_text = findViewById(R.id.device_id_text);
         ImageView cameraImage = findViewById(R.id.camera_image);
         ConstraintLayout control_cl = findViewById(R.id.control_cl);
+        control_cl_full = findViewById(R.id.dir_cl_full);
         TextView area_text = findViewById(R.id.area_text);
         if (GlobalUtil.INSTANCE.getCameraListItem()!=null){
             if (TextUtils.isEmpty(GlobalUtil.INSTANCE.getCameraListItem().getDevice_type_ico())){
@@ -539,6 +545,9 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         smallIcon = findViewById(R.id.small_icon);
         llBig =  findViewById(R.id.ll_big);
         llSmall =  findViewById(R.id.ll_small);
+        ll_small_full =  findViewById(R.id.ll_small_full);
+        ll_big_full =  findViewById(R.id.ll_big_full);
+        size_ll =  findViewById(R.id.size_ll);
         small = findViewById(R.id.small);
         big =  findViewById(R.id.big);
         up.setOnTouchListener(mOnTouchListener);
@@ -547,6 +556,12 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         right.setOnTouchListener(mOnTouchListener);
         llBig.setOnTouchListener(mOnTouchListener);
         llSmall.setOnTouchListener(mOnTouchListener);
+        up_full.setOnTouchListener(mOnTouchListener);
+        left_full.setOnTouchListener(mOnTouchListener);
+        bottom_full.setOnTouchListener(mOnTouchListener);
+        right_full.setOnTouchListener(mOnTouchListener);
+        ll_big_full.setOnTouchListener(mOnTouchListener);
+        ll_small_full.setOnTouchListener(mOnTouchListener);
         hd.setOnClickListener(this);
         flow.setOnClickListener(this);
         mRealPlaySh = mRealPlaySv.getHolder();
@@ -657,9 +672,16 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
         if (mOrientation == Configuration.ORIENTATION_PORTRAIT) {
             fullScreen(false);
             clTitle.setVisibility(View.VISIBLE);
+            control_cl_full.setVisibility(View.GONE);
+            size_ll.setVisibility(View.GONE);
         } else {
+            if (GlobalUtil.INSTANCE.getCameraListItem()!=null&&"17".equals(GlobalUtil.INSTANCE.getCameraListItem().getType())){
+                control_cl_full.setVisibility(View.VISIBLE);
+                size_ll.setVisibility(View.VISIBLE);
+            }
             fullScreen(true);
             clTitle.setVisibility(View.GONE);
+
         }
 
         if (mStatus == RealPlayStatus.STATUS_START) {
@@ -829,27 +851,34 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
                 case MotionEvent.ACTION_DOWN:// 手指按下
                     switch (view.getId()) {
                         case R.id.ll_big:
+                        case R.id.ll_big_full:
                             llBig.setBackgroundResource(R.drawable.shape_blue_with_corner_10);
                             big.setTextColor(Color.parseColor("#FFFFFF"));
                             bigIcon.setImageResource(R.drawable.icon_big_select);
                             ptzOption(EZPTZCommand.EZPTZCommandZoomIn, EZPTZAction.EZPTZActionSTART);
                             break;
                         case R.id.ll_small:
+                        case R.id.ll_small_full:
+
                             llSmall.setBackgroundResource(R.drawable.shape_blue_with_corner_10);
                             small.setTextColor(Color.parseColor("#FFFFFF"));
                             smallIcon.setImageResource(R.drawable.icon_small_select);
                             ptzOption(EZPTZCommand.EZPTZCommandZoomOut, EZPTZAction.EZPTZActionSTART);
                             break;
                         case R.id.up:// 云台-上
+                        case R.id.up_full:// 云台-上
                             ptzOption(EZPTZCommand.EZPTZCommandUp, EZPTZAction.EZPTZActionSTART);
                             break;
                         case R.id.bottom:// 云台-下
+                        case R.id.bottom_full:// 云台-下
                             ptzOption(EZPTZCommand.EZPTZCommandDown, EZPTZAction.EZPTZActionSTART);
                             break;
                         case R.id.left:// 云台-左
+                        case R.id.left_full:// 云台-左
                             ptzOption(EZPTZCommand.EZPTZCommandLeft, EZPTZAction.EZPTZActionSTART);
                             break;
                         case R.id.right:// 云台-右
+                        case R.id.right_full:// 云台-右
                             ptzOption(EZPTZCommand.EZPTZCommandRight, EZPTZAction.EZPTZActionSTART);
                             break;
                         default:
@@ -861,27 +890,33 @@ public class EZRealPlayActivity extends RootActivity implements OnClickListener,
 
                     switch (view.getId()) {
                         case R.id.ll_big:
+                        case R.id.ll_big_full:
                             llBig.setBackgroundResource(R.drawable.shape_white_with_corner_10);
                             big.setTextColor(Color.parseColor("#000000"));
                             bigIcon.setImageResource(R.drawable.icon_big);
                             ptzOption(EZPTZCommand.EZPTZCommandZoomIn, EZPTZAction.EZPTZActionSTOP);
                             break;
                         case R.id.ll_small:
+                        case R.id.ll_small_full:
                             llSmall.setBackgroundResource(R.drawable.shape_white_with_corner_10);
                             small.setTextColor(Color.parseColor("#000000"));
                             smallIcon.setImageResource(R.drawable.icon_small);
                             ptzOption(EZPTZCommand.EZPTZCommandZoomOut, EZPTZAction.EZPTZActionSTOP);
                             break;
                         case R.id.up:
+                        case R.id.up_full:
                             ptzOption(EZPTZCommand.EZPTZCommandUp, EZPTZAction.EZPTZActionSTOP);
                             break;
                         case R.id.bottom:
+                        case R.id.bottom_full:
                             ptzOption(EZPTZCommand.EZPTZCommandDown, EZPTZAction.EZPTZActionSTOP);
                             break;
                         case R.id.left:
+                        case R.id.left_full:
                             ptzOption(EZPTZCommand.EZPTZCommandLeft, EZPTZAction.EZPTZActionSTOP);
                             break;
                         case R.id.right:
+                        case R.id.right_full:
                             ptzOption(EZPTZCommand.EZPTZCommandRight, EZPTZAction.EZPTZActionSTOP);
                             break;
                         default:

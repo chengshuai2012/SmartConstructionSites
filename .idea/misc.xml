@@ -45,6 +45,8 @@
         <entry key="app/src/main/res/drawable/shape_oval_qing.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/shape_oval_red.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/shape_ring.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/shape_ring_white_60.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/shape_white_60_with_corner_10.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/shape_white_with_corner_16.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_camera_list.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.223731884057971" />
