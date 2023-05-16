@@ -43,6 +43,7 @@ import java.util.*
 object GlobalUtil {
     var loginData: LoginData?=null
     var projectId: String=""
+    var token :String = ""
     var chooseProject: ProjectDataX?=null
     var cameraListItem: CameraListItem?=null
     private fun isExternalStorageWritable(): Boolean {

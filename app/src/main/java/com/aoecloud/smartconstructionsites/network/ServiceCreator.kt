@@ -51,7 +51,7 @@ object ServiceCreator {
         override fun intercept(chain: Interceptor.Chain): Response {
             val originalRequest = chain.request()
             val request = originalRequest.newBuilder().apply {
-                header("userToken", GlobalUtil.loginData?.token?:"")
+                header("userToken", GlobalUtil.token)
             }.build()
             return chain.proceed(request)
         }
